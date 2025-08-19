@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtside - Welcome Option 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        .slide-in-left { animation: slideInLeft 0.8s ease-out 0.2s both; }
+        .slide-in-right { animation: slideInRight 0.8s ease-out 0.4s both; }
+        .pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInLeft { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes pulseGlow { 
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            <!-- Header with Logo -->
+            <div class="text-center mb-12 fade-in">
+                <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 pulse-glow">
+                    <span class="text-4xl">🏸</span>
+                </div>
+                <h1 class="text-4xl font-bold text-white mb-2">Courtside</h1>
+                <p class="text-white/70 text-lg">Book • Play • Enjoy</p>
+            </div>
+
+            <!-- User Welcome Card -->
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 mb-8 slide-in-left">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="relative">
+                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center">
+                            <img id="userPhoto" src="https://via.placeholder.com/64/FFD700/FFFFFF?text=U" 
+                                 alt="User Profile" class="w-16 h-16 rounded-full object-cover hidden">
+                            <div id="userIcon" class="text-white text-xl">👤</div>
+                        </div>
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white"></div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 id="userName" class="text-xl font-semibold text-white">Welcome back, User!</h2>
+                        <p class="text-white/70 text-sm">Ready for your next game?</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white/10 rounded-xl p-4">
+                    <p class="text-white/80 text-center text-sm">Your court booking journey starts here</p>
+                </div>
+            </div>
+
+            <!-- Features Preview -->
+            <div class="grid grid-cols-3 gap-4 mb-8 slide-in-right">
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 text-center">
+                    <div class="text-2xl mb-2">⚡</div>
+                    <p class="text-white/80 text-xs">Quick Book</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 text-center">
+                    <div class="text-2xl mb-2">📅</div>
+                    <p class="text-white/80 text-xs">Easy Schedule</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 text-center">
+                    <div class="text-2xl mb-2">💳</div>
+                    <p class="text-white/80 text-xs">Secure Pay</p>
+                </div>
+            </div>
+
+            <!-- Get Started Button -->
+            <div class="text-center fade-in" style="animation-delay: 0.6s;">
+                <button class="w-full bg-white text-purple-600 py-4 rounded-2xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg">
+                    Start Booking
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate Telegram Web App integration
+        function loadUserData() {
+            // This would come from Telegram Web App
+            const mockUser = {
+                first_name: 'Sarah',
+                last_name: 'Wilson',
+                photo_url: null // Set to actual photo URL when available
+            };
+            
+            const userName = document.getElementById('userName');
+            const userPhoto = document.getElementById('userPhoto');
+            const userIcon = document.getElementById('userIcon');
+            
+            userName.textContent = `Welcome back, ${mockUser.first_name}!`;
+            
+            if (mockUser.photo_url) {
+                userPhoto.src = mockUser.photo_url;
+                userPhoto.classList.remove('hidden');
+                userIcon.classList.add('hidden');
+            }
+        }
+        
+        // Load user data on page load
+        document.addEventListener('DOMContentLoaded', loadUserData);
+    </script>
+</body>
+</html> 

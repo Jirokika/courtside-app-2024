@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Courtside Cache</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .success { background: rgba(34, 197, 94, 0.2); }
+        .error { background: rgba(239, 68, 68, 0.2); }
+        .info { background: rgba(59, 130, 246, 0.2); }
+        .warning { background: rgba(245, 158, 11, 0.2); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧹 Courtside Cache Clearer</h1>
+        <p>This tool will clear all cached data and localStorage for the Courtside app.</p>
+        
+        <button onclick="clearAllCache()">Clear All Cache</button>
+        <button onclick="checkCurrentData()">Check Current Data</button>
+        <button onclick="clearSpecificKeys()">Clear Courtside Keys Only</button>
+        
+        <div id="status"></div>
+    </div>
+
+    <script>
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+
+        function clearAllCache() {
+            try {
+                // Clear localStorage
+                const keys = Object.keys(localStorage);
+                let removedCount = 0;
+                
+                keys.forEach(key => {
+                    localStorage.removeItem(key);
+                    removedCount++;
+                    console.log('Removed:', key);
+                });
+
+                // Clear sessionStorage
+                sessionStorage.clear();
+
+                // Clear cache storage if available
+                if ('caches' in window) {
+                    caches.keys().then(names => {
+                        names.forEach(name => {
+                            caches.delete(name);
+                        });
+                    });
+                }
+
+                showStatus(`✅ Cache cleared successfully! Removed ${removedCount} localStorage items, cleared sessionStorage, and cache storage.`, 'success');
+                
+                // Show what was cleared
+                setTimeout(() => {
+                    checkCurrentData();
+                }, 1000);
+
+            } catch (error) {
+                showStatus(`❌ Error clearing cache: ${error.message}`, 'error');
+            }
+        }
+
+        function clearSpecificKeys() {
+            try {
+                const keys = Object.keys(localStorage);
+                let removedCount = 0;
+                
+                keys.forEach(key => {
+                    if (key.includes('courtside') || 
+                        key.includes('booking') || 
+                        key.includes('auth') || 
+                        key.includes('cache') ||
+                        key.includes('token') ||
+                        key.includes('user')) {
+                        localStorage.removeItem(key);
+                        removedCount++;
+                        console.log('Removed:', key);
+                    }
+                });
+
+                showStatus(`✅ Cleared ${removedCount} Courtside-related keys from localStorage.`, 'success');
+                
+                setTimeout(() => {
+                    checkCurrentData();
+                }, 1000);
+
+            } catch (error) {
+                showStatus(`❌ Error clearing specific keys: ${error.message}`, 'error');
+            }
+        }
+
+        function checkCurrentData() {
+            try {
+                const localStorageData = {};
+                const sessionStorageData = {};
+                
+                // Check localStorage
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key) {
+                        localStorageData[key] = localStorage.getItem(key);
+                    }
+                }
+
+                // Check sessionStorage
+                for (let i = 0; i < sessionStorage.length; i++) {
+                    const key = sessionStorage.key(i);
+                    if (key) {
+                        sessionStorageData[key] = sessionStorage.getItem(key);
+                    }
+                }
+
+                let message = '<h3>Current Data:</h3>';
+                
+                if (Object.keys(localStorageData).length > 0) {
+                    message += '<h4>localStorage:</h4><ul>';
+                    Object.keys(localStorageData).forEach(key => {
+                        const value = localStorageData[key];
+                        const displayValue = value.length > 100 ? value.substring(0, 100) + '...' : value;
+                        message += `<li><strong>${key}:</strong> ${displayValue}</li>`;
+                    });
+                    message += '</ul>';
+                } else {
+                    message += '<p>✅ localStorage is empty</p>';
+                }
+
+                if (Object.keys(sessionStorageData).length > 0) {
+                    message += '<h4>sessionStorage:</h4><ul>';
+                    Object.keys(sessionStorageData).forEach(key => {
+                        const value = sessionStorageData[key];
+                        const displayValue = value.length > 100 ? value.substring(0, 100) + '...' : value;
+                        message += `<li><strong>${key}:</strong> ${displayValue}</li>`;
+                    });
+                    message += '</ul>';
+                } else {
+                    message += '<p>✅ sessionStorage is empty</p>';
+                }
+
+                showStatus(message, 'info');
+
+            } catch (error) {
+                showStatus(`❌ Error checking data: ${error.message}`, 'error');
+            }
+        }
+
+        // Auto-check on load
+        window.onload = function() {
+            checkCurrentData();
+        };
+    </script>
+</body>
+</html> 

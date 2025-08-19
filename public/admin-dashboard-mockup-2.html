@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Courtside Admin – Management</title>
+    <style>
+      :root{
+        --bg:#0c0f14;--text:#e6eef7;--muted:#9ab0c6;--border:#1a2636;--panel:#0f141c;--panel2:#0b1017;--brand:#7c3aed;--accent:#06b6d4;--good:#10b981;--bad:#ef4444;--warn:#f59e0b;--radius:16px;--shadow:0 10px 30px rgba(0,0,0,0.35);
+      }
+      *{box-sizing:border-box}
+      body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;letter-spacing:.2px;color:var(--text);background:radial-gradient(900px 400px at 120% 10%, rgba(124,58,237,.2), transparent 40%),radial-gradient(800px 420px at -20% 120%, rgba(6,182,212,.15), transparent 40%),var(--bg)}
+      .layout{display:grid;grid-template-columns:88px 1fr;min-height:100vh}
+      .rail{background:linear-gradient(180deg,#0c121b,#0a0e15);border-right:1px solid var(--border);padding:12px 10px;display:flex;flex-direction:column;gap:12px}
+      .icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(124,58,237,.22), rgba(6,182,212,.22));border:1px solid #2a3750;cursor:pointer}
+      .icon.small{width:40px;height:40px;border-radius:10px;background:var(--panel)}
+      .icon.active{outline:2px solid rgba(124,58,237,.5)}
+      .spacer{flex:1}
+      header{position:sticky;top:0;z-index:10;backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid var(--border);background:linear-gradient(180deg, rgba(12,17,26,.8), rgba(12,17,26,.6));display:flex;align-items:center;gap:12px;padding:12px 16px}
+      .pill{border:1px solid var(--border);background:var(--panel);border-radius:999px;padding:8px 12px;color:var(--muted);font-size:12px}
+      .tabs{display:flex;gap:8px}
+      .tab{padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--panel2);color:var(--muted);cursor:pointer}
+      .tab.active{color:var(--text);background:linear-gradient(135deg, rgba(124,58,237,.18), rgba(6,182,212,.18))}
+      main{padding:16px;display:grid;gap:16px}
+      .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+      .card{background:linear-gradient(180deg,#0e1520,#0b1119);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
+      .title{font-weight:700;margin-bottom:10px}
+      .toolbar{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+      .btn{border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}
+      .table{width:100%;border-collapse:collapse}
+      th,td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:left}
+      th{color:var(--muted);font-size:12px;letter-spacing:.3px}
+      tr:hover td{background:#0e1623}
+      .row{display:flex;gap:10px}
+      .stack{display:grid;gap:10px}
+      .metric{display:flex;justify-content:space-between;background:#0f1622;border:1px solid var(--border);border-radius:12px;padding:10px}
+      .metric .k{color:var(--muted);font-size:12px}
+      .metric .v{font-weight:700}
+      .status{border:1px solid #28415d;background:#0f1826;border-radius:12px;padding:10px}
+      .status .ok{color:var(--good)}
+      .status .bad{color:var(--bad)}
+      .status .warn{color:var(--warn)}
+      .search{display:flex;gap:8px}
+      .search input{flex:1;min-width:220px;background:#0c121b;border:1px solid var(--border);border-radius:10px;padding:8px 10px;color:var(--text)}
+      @media (max-width: 1100px){.layout{grid-template-columns:1fr}.rail{display:none}.grid{grid-template-columns:1fr}}
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <div class="rail">
+        <div class="icon active">🏟️</div>
+        <div class="icon small">📆</div>
+        <div class="icon small">👥</div>
+        <div class="icon small">🎁</div>
+        <div class="icon small">🔔</div>
+        <div class="spacer"></div>
+        <div class="icon small">⚙️</div>
+      </div>
+
+      <div>
+        <header>
+          <div class="pill">Environment: Production</div>
+          <div class="tabs">
+            <div class="tab active">Manage</div>
+            <div class="tab">Monitor</div>
+            <div class="tab">Automations</div>
+          </div>
+          <div class="spacer"></div>
+          <div class="pill">v0.1 mockup</div>
+        </header>
+
+        <main>
+          <div class="grid">
+            <div class="card">
+              <div class="title">Bookings</div>
+              <div class="toolbar row">
+                <div class="search"><input placeholder="Search bookings by user, court, ID"/><button class="btn">Search</button></div>
+                <button class="btn">New Manual Booking</button>
+                <button class="btn">Export CSV</button>
+              </div>
+              <table class="table">
+                <thead><tr><th>ID</th><th>User</th><th>Court</th><th>Date</th><th>Time</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td>#B-10012</td><td>@nina</td><td>A</td><td>2025-08-11</td><td>10:00–11:00</td><td>Confirmed</td><td><button class="btn">View</button></td></tr>
+                  <tr><td>#B-10011</td><td>@rohan</td><td>C</td><td>2025-08-11</td><td>09:00–10:00</td><td>Pending</td><td><button class="btn">Approve</button></td></tr>
+                  <tr><td>#B-10010</td><td>@mia</td><td>B</td><td>2025-08-11</td><td>08:30–09:30</td><td>Cancelled</td><td><button class="btn">Details</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="stack">
+              <div class="metric">
+                <div>
+                  <div class="k">Utilization today</div>
+                  <div class="v">76%</div>
+                </div>
+                <button class="btn">Open Calendar</button>
+              </div>
+              <div class="metric">
+                <div>
+                  <div class="k">Revenue (7d)</div>
+                  <div class="v">$2,914</div>
+                </div>
+                <button class="btn">Export</button>
+              </div>
+
+              <div class="status">
+                <div class="title">System</div>
+                <div>API: <span class="ok">OK</span></div>
+                <div>Database: <span class="ok">OK</span></div>
+                <div>Queue: <span class="warn">High latency</span></div>
+              </div>
+
+              <div class="card">
+                <div class="title">Quick actions</div>
+                <div class="row">
+                  <button class="btn">Issue Reward</button>
+                  <button class="btn">Send Notification</button>
+                  <button class="btn">Block User</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="title">Users</div>
+            <table class="table">
+              <thead><tr><th>User</th><th>Joined</th><th>Bookings</th><th>Points</th><th>Last Active</th><th></th></tr></thead>
+              <tbody>
+                <tr><td>@alex</td><td>2025-06-01</td><td>12</td><td>420</td><td>1h ago</td><td><button class="btn">Profile</button></td></tr>
+                <tr><td>@june</td><td>2025-05-12</td><td>7</td><td>160</td><td>3h ago</td><td><button class="btn">Profile</button></td></tr>
+                <tr><td>@mark</td><td>2025-07-22</td><td>3</td><td>40</td><td>1d ago</td><td><button class="btn">Profile</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+  </html>
+
+
+

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time Filtering Debug</title>
+</head>
+<body>
+    <h1>Cambodia Time Filtering Debug</h1>
+    <div id="output"></div>
+
+    <script>
+        function debugTimeFiltering() {
+            const now = new Date();
+            const cambodiaTime = new Date(now.getTime() + (7 * 60 * 60 * 1000)); // GMT+7
+            const cambodiaHour = cambodiaTime.getUTCHours();
+            const cambodiaMinute = cambodiaTime.getUTCMinutes();
+            const cambodiaTimeInMinutes = cambodiaHour * 60 + cambodiaMinute;
+            const bufferMinutes = 30;
+            const cutoffTimeInMinutes = cambodiaTimeInMinutes + bufferMinutes;
+
+            let output = `
+                <h2>Current Time Analysis</h2>
+                <p><strong>Browser time:</strong> ${now.toLocaleString()}</p>
+                <p><strong>Cambodia time (GMT+7):</strong> ${cambodiaHour.toString().padStart(2, '0')}:${cambodiaMinute.toString().padStart(2, '0')}</p>
+                <p><strong>Cambodia time in minutes:</strong> ${cambodiaTimeInMinutes} (${cambodiaHour}*60 + ${cambodiaMinute})</p>
+                <p><strong>30-minute buffer added:</strong> ${cambodiaTimeInMinutes} + ${bufferMinutes} = ${cutoffTimeInMinutes}</p>
+                <p><strong>Cutoff time:</strong> ${Math.floor(cutoffTimeInMinutes / 60).toString().padStart(2, '0')}:${(cutoffTimeInMinutes % 60).toString().padStart(2, '0')}</p>
+                
+                <h2>Time Slot Filtering (7AM-10PM)</h2>
+                <table border="1" style="border-collapse: collapse; margin-top: 20px;">
+                    <tr><th>Slot Time</th><th>Minutes</th><th>vs Cutoff</th><th>Status</th></tr>
+            `;
+
+            // Generate slots from 7AM to 10PM
+            for (let hour = 7; hour <= 22; hour++) {
+                const slotTimeInMinutes = hour * 60;
+                const isAvailable = slotTimeInMinutes > cutoffTimeInMinutes;
+                const status = isAvailable ? '✅ SHOWN' : '❌ HIDDEN';
+                const comparison = `${slotTimeInMinutes} > ${cutoffTimeInMinutes}`;
+                
+                output += `
+                    <tr style="background-color: ${isAvailable ? '#e8f5e8' : '#ffe8e8'}">
+                        <td>${hour.toString().padStart(2, '0')}:00</td>
+                        <td>${slotTimeInMinutes}</td>
+                        <td>${comparison}</td>
+                        <td>${status}</td>
+                    </tr>
+                `;
+            }
+
+            output += '</table>';
+
+            // Count shown vs hidden
+            let shownCount = 0;
+            let hiddenCount = 0;
+            for (let hour = 7; hour <= 22; hour++) {
+                const slotTimeInMinutes = hour * 60;
+                const isAvailable = slotTimeInMinutes > cutoffTimeInMinutes;
+                if (isAvailable) shownCount++;
+                else hiddenCount++;
+            }
+
+            output += `
+                <h2>Summary</h2>
+                <p><strong>Total slots:</strong> 16 (7AM-10PM)</p>
+                <p><strong>Shown slots:</strong> ${shownCount}</p>
+                <p><strong>Hidden slots:</strong> ${hiddenCount} (past 30-min buffer)</p>
+            `;
+
+            document.getElementById('output').innerHTML = output;
+        }
+
+        // Run immediately
+        debugTimeFiltering();
+
+        // Update every second
+        setInterval(debugTimeFiltering, 1000);
+    </script>
+</body>
+</html>

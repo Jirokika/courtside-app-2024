@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtside Bot - Court Booking App Mockup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screen {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .screen:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .screen-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .screen-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .screen-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .screen-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: #22c55e;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 2px;
+        }
+
+        .badge-badminton {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        .badge-pickleball {
+            background: #d946ef;
+            color: white;
+        }
+
+        .badge-feature {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0ea5e9;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .demo-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: #0ea5e9;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .demo-btn:hover {
+            background: #0284c7;
+        }
+
+        .demo-btn.secondary {
+            background: #6b7280;
+        }
+
+        .demo-btn.secondary:hover {
+            background: #4b5563;
+        }
+
+        .tech-stack {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .tech-stack h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .tech-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .tech-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .tech-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .screens-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏸 Courtside Bot</h1>
+            <p>Modern Court Booking Telegram Mini App</p>
+        </div>
+
+        <div class="screens-grid">
+            <!-- Welcome Screen -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #0ea5e9;">🏠</div>
+                    <div class="screen-title">Welcome Screen</div>
+                </div>
+                <div class="screen-content">
+                    <p>Beautiful onboarding experience with app introduction and quick start options.</p>
+                    <ul class="feature-list">
+                        <li>App introduction and features</li>
+                        <li>Quick start buttons</li>
+                        <li>Telegram Web App integration</li>
+                        <li>iOS 18-inspired design</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Home Screen -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #22c55e;">🏠</div>
+                    <div class="screen-title">Home Screen</div>
+                </div>
+                <div class="screen-content">
+                    <p>Main dashboard with quick actions and recent bookings.</p>
+                    <ul class="feature-list">
+                        <li>Quick booking shortcuts</li>
+                        <li>Recent bookings display</li>
+                        <li>Points and credits overview</li>
+                        <li>Navigation to all features</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Sport Selection -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #f59e0b;">🎾</div>
+                    <div class="screen-title">Sport Selection</div>
+                </div>
+                <div class="screen-content">
+                    <p>Choose between Badminton and Pickleball with pricing and court info.</p>
+                    <div class="badge badge-badminton">Badminton - $12/hour</div>
+                    <div class="badge badge-pickleball">Pickleball - $16/hour</div>
+                    <ul class="feature-list">
+                        <li>8 Badminton courts</li>
+                        <li>4 Pickleball courts</li>
+                        <li>Real-time availability</li>
+                        <li>Sport-specific pricing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Date Selection -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #8b5cf6;">📅</div>
+                    <div class="screen-title">Date Selection</div>
+                </div>
+                <div class="screen-content">
+                    <p>Interactive calendar for selecting booking dates with availability indicators.</p>
+                    <ul class="feature-list">
+                        <li>30-day advance booking</li>
+                        <li>Availability indicators</li>
+                        <li>Multiple date selection</li>
+                        <li>Smart date suggestions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Time Selection -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #ec4899;">⏰</div>
+                    <div class="screen-title">Time Selection</div>
+                </div>
+                <div class="screen-content">
+                    <p>Dynamic time slot selection from 7:00 AM to 9:00 PM.</p>
+                    <ul class="feature-list">
+                        <li>7:00 AM - 9:00 PM hours</li>
+                        <li>Real-time availability</li>
+                        <li>Popular time recommendations</li>
+                        <li>Smart filtering</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Court Selection -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #10b981;">🏟️</div>
+                    <div class="screen-title">Court Selection</div>
+                </div>
+                <div class="screen-content">
+                    <p>Choose from available courts with real-time status and preferences.</p>
+                    <ul class="feature-list">
+                        <li>Court availability status</li>
+                        <li>Court preferences</li>
+                        <li>Multiple court booking</li>
+                        <li>Court information</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Duration Selection -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #f97316;">⏱️</div>
+                    <div class="screen-title">Duration Selection</div>
+                </div>
+                <div class="screen-content">
+                    <p>Flexible duration options from 1 to 5 hours with pricing calculation.</p>
+                    <ul class="feature-list">
+                        <li>1-5 hour options</li>
+                        <li>Real-time pricing</li>
+                        <li>Duration recommendations</li>
+                        <li>Cost calculation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Booking Summary -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #06b6d4;">📋</div>
+                    <div class="screen-title">Booking Summary</div>
+                </div>
+                <div class="screen-content">
+                    <p>Comprehensive booking overview with all details and payment options.</p>
+                    <ul class="feature-list">
+                        <li>Complete booking details</li>
+                        <li>Total cost calculation</li>
+                        <li>Payment methods</li>
+                        <li>Confirmation options</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bookings Management -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #84cc16;">📚</div>
+                    <div class="screen-title">Bookings Management</div>
+                </div>
+                <div class="screen-content">
+                    <p>View, modify, and cancel existing bookings with full history.</p>
+                    <ul class="feature-list">
+                        <li>Active bookings list</li>
+                        <li>Booking history</li>
+                        <li>Modification options</li>
+                        <li>Cancellation workflow</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Points System -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #a855f7;">⭐</div>
+                    <div class="screen-title">Points System</div>
+                </div>
+                <div class="screen-content">
+                    <p>Earn and redeem points for rewards and discounts on bookings.</p>
+                    <ul class="feature-list">
+                        <li>Points earning</li>
+                        <li>Rewards redemption</li>
+                        <li>Points history</li>
+                        <li>Special offers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Credits & Payments -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #ef4444;">💳</div>
+                    <div class="screen-title">Credits & Payments</div>
+                </div>
+                <div class="screen-content">
+                    <p>Manage account credits and payment methods for seamless transactions.</p>
+                    <ul class="feature-list">
+                        <li>Credit balance</li>
+                        <li>Payment methods</li>
+                        <li>Transaction history</li>
+                        <li>Auto-recharge options</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #3b82f6;">🔔</div>
+                    <div class="screen-title">Notifications</div>
+                </div>
+                <div class="screen-content">
+                    <p>Stay updated with booking reminders, confirmations, and updates.</p>
+                    <ul class="feature-list">
+                        <li>Booking reminders</li>
+                        <li>Confirmation notifications</li>
+                        <li>Modification alerts</li>
+                        <li>Custom preferences</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-icon" style="background: #6366f1;">⚙️</div>
+                    <div class="screen-title">Admin Dashboard</div>
+                </div>
+                <div class="screen-content">
+                    <p>Comprehensive admin tools for managing courts, users, and bookings.</p>
+                    <ul class="feature-list">
+                        <li>Court management</li>
+                        <li>User administration</li>
+                        <li>Booking oversight</li>
+                        <li>Analytics & reports</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Statistics -->
+        <div class="screen">
+            <div class="screen-header">
+                <div class="screen-icon" style="background: #059669;">📊</div>
+                <div class="screen-title">App Statistics & Features</div>
+            </div>
+            <div class="screen-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Total Courts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">14</div>
+                        <div class="stat-label">Operating Hours</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">30</div>
+                        <div class="stat-label">Days Advance Booking</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Sports Supported</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <h4 style="color: #333; margin-bottom: 15px;">Key Features:</h4>
+                    <div class="badge badge-feature">Telegram Mini App</div>
+                    <div class="badge badge-feature">iOS 18 Design</div>
+                    <div class="badge badge-feature">Real-time Availability</div>
+                    <div class="badge badge-feature">Points System</div>
+                    <div class="badge badge-feature">Payment Integration</div>
+                    <div class="badge badge-feature">Offline Support</div>
+                    <div class="badge badge-feature">Push Notifications</div>
+                    <div class="badge badge-feature">Analytics Dashboard</div>
+                </div>
+
+                <div class="demo-buttons">
+                    <button class="demo-btn">View Live Demo</button>
+                    <button class="demo-btn secondary">Download App</button>
+                    <button class="demo-btn">Contact Support</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Stack -->
+        <div class="tech-stack">
+            <h2>🛠️ Technical Architecture</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">⚛️</div>
+                    <div class="tech-name">React 18</div>
+                    <div class="tech-desc">Modern UI framework with hooks</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔷</div>
+                    <div class="tech-name">TypeScript</div>
+                    <div class="tech-desc">Type-safe development</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Tailwind CSS</div>
+                    <div class="tech-desc">Utility-first styling</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-name">Telegram Web App</div>
+                    <div class="tech-desc">Native integration</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🚀</div>
+                    <div class="tech-name">Vite</div>
+                    <div class="tech-desc">Fast build tool</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🗄️</div>
+                    <div class="tech-name">Node.js Backend</div>
+                    <div class="tech-desc">RESTful API</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 Courtside Bot - Modern Court Booking Solution</p>
+            <p>Built with ❤️ for the sports community</p>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity to the mockup
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add smooth scrolling for demo buttons
+        document.querySelectorAll('.demo-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('This is a mockup! In the real app, this would navigate to the actual feature.');
+            });
+        });
+
+        // Add some dynamic content updates
+        setInterval(() => {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                if (Math.random() > 0.7) {
+                    stat.style.color = '#22c55e';
+                    setTimeout(() => {
+                        stat.style.color = '#0ea5e9';
+                    }, 1000);
+                }
+            });
+        }, 3000);
+    </script>
+</body>
+</html>

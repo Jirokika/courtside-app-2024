@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtside - Simple Welcome 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        .bounce-in { animation: bounceIn 0.8s ease-out 0.4s both; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounceIn { 
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md text-center">
+            <!-- Main Content -->
+            <div class="bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-white/20 fade-in">
+                <!-- Logo/Icon -->
+                <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <span class="text-4xl">🏓</span>
+                </div>
+                
+                <!-- Welcome Title -->
+                <h1 class="text-4xl font-bold text-white mb-6">Welcome to Courtside</h1>
+                
+                <!-- Slogan -->
+                <p class="text-white/80 text-xl mb-8">Best courts in town</p>
+                
+                <!-- Tagline -->
+                <p class="text-white/60 text-lg mb-12">tap, pay, play!</p>
+                
+                <!-- Get Started Button -->
+                <div class="bounce-in">
+                    <button class="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-white py-4 rounded-2xl font-semibold text-lg hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 shadow-lg">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

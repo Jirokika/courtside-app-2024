@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Courtside Admin – Overview</title>
+    <meta name="description" content="Admin dashboard overview mockup for Courtside" />
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --panel: #121821;
+        --panel-2: #0f141c;
+        --text: #e7edf5;
+        --muted: #9fb0c3;
+        --brand: #4f9cff;
+        --accent: #22d3ee;
+        --good: #10b981;
+        --warn: #f59e0b;
+        --bad: #ef4444;
+        --border: #1e2a3a;
+        --card: #0e1520;
+        --shadow: 0 10px 30px rgba(0,0,0,0.35);
+        --radius: 14px;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+        color: var(--text);
+        background: radial-gradient(1200px 600px at 80% -10%, rgba(79,156,255,0.18), transparent 40%),
+                    radial-gradient(800px 500px at -10% 110%, rgba(34,211,238,0.14), transparent 40%),
+                    var(--bg);
+        letter-spacing: 0.2px;
+      }
+      .app {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        grid-template-rows: 64px 1fr;
+        grid-template-areas:
+          "sidebar header"
+          "sidebar main";
+        min-height: 100vh;
+      }
+      aside {
+        grid-area: sidebar;
+        background: linear-gradient(180deg, #0e1420 0%, #0b1018 100%);
+        border-right: 1px solid var(--border);
+        padding: 18px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: linear-gradient(180deg, #111827, #0e1623);
+        box-shadow: var(--shadow);
+      }
+      .brand .logo {
+        width: 28px; height: 28px; border-radius: 8px;
+        background: linear-gradient(135deg, var(--brand), var(--accent));
+      }
+      .brand .title { font-weight: 700; letter-spacing: 0.3px; }
+      nav { margin-top: 8px; display: grid; gap: 6px; }
+      .nav-item {
+        display: flex; align-items: center; gap: 10px;
+        padding: 10px 12px; border-radius: 10px; color: var(--muted);
+        cursor: pointer; user-select: none; border: 1px solid transparent;
+      }
+      .nav-item.active { color: var(--text); background: #0e1520; border-color: var(--border); }
+      .spacer { flex: 1; }
+      .mini {
+        margin-top: auto; padding: 10px 12px; font-size: 12px; color: var(--muted);
+        border-top: 1px dashed var(--border);
+      }
+
+      header {
+        grid-area: header;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 12px 18px; border-bottom: 1px solid var(--border);
+        backdrop-filter: saturate(120%) blur(6px);
+        background: linear-gradient(180deg, rgba(14,21,32,0.75), rgba(14,21,32,0.55));
+        position: sticky; top: 0; z-index: 2;
+      }
+      .search { display: flex; align-items: center; gap: 10px; }
+      .search input {
+        width: 360px; max-width: 48vw;
+        padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
+        background: var(--panel-2); color: var(--text);
+      }
+      .actions { display: flex; align-items: center; gap: 10px; }
+      .btn {
+        appearance: none; border: 1px solid var(--border); border-radius: 10px;
+        background: var(--panel); color: var(--text); padding: 10px 12px; cursor: pointer;
+      }
+      .btn.brand { background: linear-gradient(135deg, rgba(79,156,255,0.2), rgba(34,211,238,0.18)); border-color: #274364; }
+
+      main { grid-area: main; padding: 18px; display: grid; gap: 18px; }
+      .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+      .card {
+        background: linear-gradient(180deg, #0e1520, #0b111a);
+        border: 1px solid var(--border); border-radius: var(--radius); padding: 14px;
+        box-shadow: var(--shadow);
+      }
+      .kpi .label { color: var(--muted); font-size: 12px; }
+      .kpi .value { font-size: 24px; font-weight: 700; margin-top: 6px; }
+      .kpi .delta { margin-top: 6px; font-size: 12px; }
+      .delta.up { color: var(--good); }
+      .delta.down { color: var(--bad); }
+
+      .grid-2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; }
+      .section-title { font-weight: 700; margin-bottom: 10px; }
+      .chart {
+        height: 260px; border-radius: 12px; border: 1px dashed var(--border);
+        background: radial-gradient(600px 220px at 70% -20%, rgba(79,156,255,0.12), transparent 40%), var(--panel-2);
+        display: grid; place-items: center;
+      }
+      .legend { display: flex; gap: 12px; margin-top: 8px; color: var(--muted); font-size: 12px; }
+
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); text-align: left; }
+      th { color: var(--muted); font-weight: 600; font-size: 12px; letter-spacing: 0.4px; }
+      tr:hover td { background: #0e1520; }
+      .badge { border: 1px solid var(--border); background: #0e1623; border-radius: 999px; padding: 2px 8px; font-size: 12px; }
+      .badge.good { color: var(--good); border-color: #134e43; background: #0c1916; }
+      .badge.bad { color: var(--bad); border-color: #4c1d1d; background: #1a0f0f; }
+
+      @media (max-width: 1100px) { .kpis{ grid-template-columns: repeat(2, 1fr); } .grid-2{ grid-template-columns: 1fr; } aside{ display:none; } .app{ grid-template-columns: 1fr; grid-template-areas: "header" "main"; } }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside>
+        <div class="brand">
+          <div class="logo"></div>
+          <div class="title">Courtside Admin</div>
+        </div>
+        <nav>
+          <div class="nav-item active">Overview</div>
+          <div class="nav-item">Bookings</div>
+          <div class="nav-item">Users</div>
+          <div class="nav-item">Courts & Slots</div>
+          <div class="nav-item">Credits</div>
+          <div class="nav-item">Points</div>
+          <div class="nav-item">Rewards</div>
+          <div class="nav-item">Promo Codes</div>
+          <div class="nav-item">Notifications</div>
+          <div class="nav-item">Short Links</div>
+          <div class="nav-item">Tasks</div>
+          <div class="nav-item">Analytics</div>
+          <div class="nav-item">Audit</div>
+        </nav>
+        <div class="spacer"></div>
+        <div class="mini">v0.1 mockup</div>
+      </aside>
+
+      <header>
+        <div class="search">
+          <input placeholder="Search users, bookings, courts…" />
+          <button class="btn">Filter</button>
+        </div>
+        <div class="actions">
+          <button class="btn">Export</button>
+          <button class="btn brand">New Announcement</button>
+          <div class="avatar" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--accent));"></div>
+        </div>
+      </header>
+
+      <main>
+        <section class="kpis">
+          <div class="card kpi">
+            <div class="label">Today Bookings</div>
+            <div class="value">128</div>
+            <div class="delta up">+12.5% vs yesterday</div>
+          </div>
+          <div class="card kpi">
+            <div class="label">Active Users</div>
+            <div class="value">2,431</div>
+            <div class="delta up">+4.2% WoW</div>
+          </div>
+          <div class="card kpi">
+            <div class="label">Cancellation Rate</div>
+            <div class="value">3.1%</div>
+            <div class="delta down">-0.6 pt</div>
+          </div>
+          <div class="card kpi">
+            <div class="label">Avg. Utilization</div>
+            <div class="value">74%</div>
+            <div class="delta up">+3.8 pt</div>
+          </div>
+        </section>
+
+        <section class="grid-2">
+          <div class="card">
+            <div class="section-title">Bookings trend (7 days)</div>
+            <div class="chart">
+              <svg viewBox="0 0 600 220" width="92%" height="88%">
+                <defs>
+                  <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(79,156,255,0.6)"/>
+                    <stop offset="100%" stop-color="rgba(79,156,255,0.05)"/>
+                  </linearGradient>
+                </defs>
+                <polyline fill="url(#g)" stroke="none" points="0,170 80,160 160,120 240,140 320,90 400,110 480,70 560,80 600,170 0,170"/>
+                <polyline fill="none" stroke="#4f9cff" stroke-width="3" points="0,160 80,150 160,110 240,130 320,80 400,100 480,60 560,70"/>
+              </svg>
+            </div>
+            <div class="legend"><span>Bookings</span><span style="opacity:.6">Seven-day window</span></div>
+          </div>
+          <div class="card">
+            <div class="section-title">System health</div>
+            <table>
+              <thead>
+                <tr><th>Service</th><th>Status</th><th>Latency</th><th>Errors</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Courtside-Bot API</td><td><span class="badge good">Operational</span></td><td>112 ms</td><td>0.02%</td></tr>
+                <tr><td>Postgres</td><td><span class="badge good">Healthy</span></td><td>8 ms</td><td>—</td></tr>
+                <tr><td>Notif. Worker</td><td><span class="badge good">Operational</span></td><td>74 ms</td><td>0.10%</td></tr>
+                <tr><td>Cache</td><td><span class="badge bad">Degraded</span></td><td>—</td><td>1.6%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-title">Recent bookings</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>User</th>
+                <th>Court</th>
+                <th>Time</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#B-88341</td><td>@alex</td><td>Court A</td><td>10:00–11:00</td><td>$18</td><td><span class="badge good">Confirmed</span></td>
+                <td><button class="btn">View</button></td>
+              </tr>
+              <tr>
+                <td>#B-88340</td><td>@maria</td><td>Court C</td><td>09:30–10:30</td><td>$16</td><td><span class="badge">Pending</span></td>
+                <td><button class="btn">Approve</button></td>
+              </tr>
+              <tr>
+                <td>#B-88339</td><td>@sam</td><td>Court B</td><td>09:00–10:00</td><td>$18</td><td><span class="badge bad">Cancelled</span></td>
+                <td><button class="btn">Details</button></td>
+              </tr>
+              <tr>
+                <td>#B-88338</td><td>@lisa</td><td>Court D</td><td>08:30–09:30</td><td>$15</td><td><span class="badge good">Confirmed</span></td>
+                <td><button class="btn">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="grid-2">
+          <div class="card">
+            <div class="section-title">Users</div>
+            <div style="display:flex; gap:10px; margin-bottom:10px; align-items:center;">
+              <input placeholder="Search @username, name, telegramId" style="flex:1; padding:8px 10px; border-radius:10px; border:1px solid var(--border); background:var(--panel-2); color:var(--text);"/>
+              <button class="btn">Search</button>
+              <button class="btn">Export</button>
+            </div>
+            <table>
+              <thead><tr><th>User</th><th>Credits</th><th>Points</th><th>Premium</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>@alex</td><td>240</td><td>820</td><td>Yes</td>
+                  <td>
+                    <button class="btn">Add Credits</button>
+                    <button class="btn">Adjust Points</button>
+                    <button class="btn">Block</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>@maria</td><td>120</td><td>340</td><td>No</td>
+                  <td>
+                    <button class="btn">Add Credits</button>
+                    <button class="btn">Adjust Points</button>
+                    <button class="btn">Block</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="section-title">Credit purchases</div>
+            <table>
+              <thead><tr><th>Request</th><th>User</th><th>Package</th><th>USD</th><th>Credits</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>CP-3210</td><td>@alex</td><td>Starter</td><td>$20</td><td>200</td><td><span class="badge">pending</span></td><td><button class="btn">Approve</button> <button class="btn">Reject</button></td></tr>
+                <tr><td>CP-3209</td><td>@maria</td><td>Pro</td><td>$50</td><td>550</td><td><span class="badge good">approved</span></td><td><button class="btn">View</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid-2">
+          <div class="card">
+            <div class="section-title">Points transactions</div>
+            <table>
+              <thead><tr><th>ID</th><th>User</th><th>Amount</th><th>Type</th><th>Source</th><th>Description</th><th>When</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td>PT-8821</td><td>@alex</td><td>+50</td><td>earned</td><td>task_completion</td><td>Followed channel</td><td>2h</td><td><button class="btn">Revert</button></td></tr>
+                <tr><td>PT-8819</td><td>@sam</td><td>-120</td><td>spent</td><td>reward_purchase</td><td>10% discount</td><td>1d</td><td><button class="btn">Refund</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="section-title">Rewards</div>
+            <div style="display:flex;gap:10px;margin-bottom:10px"><button class="btn">New Reward</button><button class="btn">Import</button></div>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Cost</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>10% Off</td><td>discount</td><td>200</td><td>∞</td><td><span class="badge good">active</span></td><td><button class="btn">Edit</button> <button class="btn">Deactivate</button></td></tr>
+                <tr><td>Free Hour</td><td>voucher</td><td>1200</td><td>5</td><td><span class="badge">paused</span></td><td><button class="btn">Activate</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid-2">
+          <div class="card">
+            <div class="section-title">Promo codes</div>
+            <div style="display:flex;gap:10px;margin-bottom:10px"><button class="btn">New Code</button><button class="btn">Export</button></div>
+            <table>
+              <thead><tr><th>Code</th><th>Type</th><th>Value</th><th>Max uses</th><th>Used</th><th>Active</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>WINTER25</td><td>percent</td><td>25%</td><td>100</td><td>42</td><td>Yes</td><td><button class="btn">Deactivate</button></td></tr>
+                <tr><td>NEW10</td><td>amount</td><td>$10</td><td>—</td><td>11</td><td>No</td><td><button class="btn">Activate</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="section-title">Notifications</div>
+            <div style="display:grid; gap:8px; margin-bottom:10px;">
+              <input placeholder="Title" style="padding:8px 10px; border-radius:10px; border:1px solid var(--border); background:var(--panel-2); color:var(--text);"/>
+              <textarea placeholder="Message" rows="3" style="padding:8px 10px; border-radius:10px; border:1px solid var(--border); background:var(--panel-2); color:var(--text);"></textarea>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <input placeholder="Segment (e.g. premium, inactive_30d)" style="flex:1; padding:8px 10px; border-radius:10px; border:1px solid var(--border); background:var(--panel-2); color:var(--text);"/>
+                <input type="datetime-local" style="padding:8px 10px; border-radius:10px; border:1px solid var(--border); background:var(--panel-2); color:var(--text);"/>
+                <button class="btn brand">Schedule</button>
+              </div>
+            </div>
+            <table>
+              <thead><tr><th>ID</th><th>Title</th><th>Segment</th><th>When</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td>N-771</td><td>Weekend Deals</td><td>all</td><td>2025-08-12 10:00</td><td><span class="badge">queued</span></td><td><button class="btn">Cancel</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid-2">
+          <div class="card">
+            <div class="section-title">Courts</div>
+            <table>
+              <thead><tr><th>Name</th><th>Sport</th><th>Price/hr</th><th>Available</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>Court A</td><td>Badminton</td><td>$12</td><td>Yes</td><td><button class="btn">Edit</button> <button class="btn">Toggle</button></td></tr>
+                <tr><td>Court B</td><td>Pickleball</td><td>$16</td><td>No</td><td><button class="btn">Edit</button> <button class="btn">Toggle</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="section-title">Time slots</div>
+            <div class="chart">slot calendar placeholder</div>
+          </div>
+        </section>
+
+        <section class="grid-2">
+          <div class="card">
+            <div class="section-title">Short links</div>
+            <table>
+              <thead><tr><th>Short code</th><th>URL</th><th>User</th><th>Expires</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>abc123</td><td>/b/abc123</td><td>@alex</td><td>2025-08-18</td><td><button class="btn">Copy</button> <button class="btn">Delete</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="section-title">Tasks</div>
+            <div style="display:flex; gap:10px; margin-bottom:10px"><button class="btn">New Task</button><button class="btn">Import</button></div>
+            <table>
+              <thead><tr><th>Name</th><th>Category</th><th>Points</th><th>Type</th><th>Active</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>Follow Channel</td><td>social</td><td>50</td><td>one-time</td><td>Yes</td><td><button class="btn">Edit</button> <button class="btn">Disable</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid-2">
+          <div class="card">
+            <div class="section-title">Booking analytics</div>
+            <div class="chart">
+              <svg viewBox="0 0 600 220" width="92%" height="88%">
+                <polyline fill="none" stroke="#22d3ee" stroke-width="3" points="0,160 80,150 160,140 240,120 320,110 400,100 480,92 560,88"/>
+              </svg>
+            </div>
+            <div class="legend"><span>Peak hours by day</span><span style="opacity:.6">from bookingAnalytics</span></div>
+          </div>
+          <div class="card">
+            <div class="section-title">Audit log</div>
+            <table>
+              <thead><tr><th>When</th><th>Actor</th><th>Action</th><th>Target</th></tr></thead>
+              <tbody>
+                <tr><td>10:12</td><td>@admin</td><td>updated promo code</td><td>WINTER25</td></tr>
+                <tr><td>Yesterday</td><td>@ops</td><td>approved credit purchase</td><td>CP-3209</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+  </html>
+
+

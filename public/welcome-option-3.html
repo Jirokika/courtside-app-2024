@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtside - Welcome Option 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        .bounce-in { animation: bounceIn 0.8s ease-out 0.3s both; }
+        .float { animation: float 3s ease-in-out infinite; }
+        .spin-slow { animation: spin 8s linear infinite; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounceIn { 
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes float { 
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            <!-- Animated Sports Icons Background -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute top-10 left-10 text-4xl opacity-20 float" style="animation-delay: 0s;">🏸</div>
+                <div class="absolute top-20 right-10 text-3xl opacity-20 float" style="animation-delay: 1s;">🏓</div>
+                <div class="absolute bottom-20 left-10 text-3xl opacity-20 float" style="animation-delay: 2s;">🎾</div>
+                <div class="absolute bottom-10 right-20 text-4xl opacity-20 float" style="animation-delay: 0.5s;">⚽</div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="relative z-10">
+                <!-- User Profile Section -->
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 text-center mb-8 fade-in">
+                    <div class="relative mb-6">
+                        <div class="w-28 h-28 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4 relative">
+                            <img id="userPhoto" src="https://via.placeholder.com/112/FFD700/FFFFFF?text=U" 
+                                 alt="User Profile" class="w-28 h-28 rounded-full object-cover hidden">
+                            <div id="userIcon" class="text-white text-4xl">👤</div>
+                            <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-green-400 rounded-full border-4 border-white flex items-center justify-center">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h1 id="userName" class="text-3xl font-bold text-white mb-3">Welcome, User!</h1>
+                    <p class="text-white/80 text-lg mb-4">Your sports journey begins here</p>
+                    
+                    <div class="flex justify-center space-x-2">
+                        <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                        <div class="w-2 h-2 bg-white rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                        <div class="w-2 h-2 bg-white rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                    </div>
+                </div>
+
+                <!-- Welcome Message -->
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 text-center mb-8 bounce-in">
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 spin-slow">
+                            <span class="text-2xl">🏸</span>
+                        </div>
+                    </div>
+                    
+                    <h2 class="text-2xl font-bold text-white mb-4">Welcome to Courtside</h2>
+                    <p class="text-white/80 text-lg mb-6">Book courts instantly, play anytime</p>
+                    
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <div class="text-center">
+                            <div class="text-2xl mb-1">⚡</div>
+                            <p class="text-white/70 text-xs">Fast</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl mb-1">🔒</div>
+                            <p class="text-white/70 text-xs">Secure</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl mb-1">🎯</div>
+                            <p class="text-white/70 text-xs">Simple</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-white/60 text-sm">tap, pay, play!</p>
+                </div>
+
+                <!-- Get Started Button -->
+                <div class="text-center fade-in" style="animation-delay: 0.8s;">
+                    <button class="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-white py-5 rounded-2xl font-bold text-lg hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 shadow-lg transform hover:scale-105">
+                        Let's Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate Telegram Web App integration
+        function loadUserData() {
+            // This would come from Telegram Web App
+            const mockUser = {
+                first_name: 'Alex',
+                last_name: 'Chen',
+                photo_url: null // Set to actual photo URL when available
+            };
+            
+            const userName = document.getElementById('userName');
+            const userPhoto = document.getElementById('userPhoto');
+            const userIcon = document.getElementById('userIcon');
+            
+            userName.textContent = `Welcome, ${mockUser.first_name}!`;
+            
+            if (mockUser.photo_url) {
+                userPhoto.src = mockUser.photo_url;
+                userPhoto.classList.remove('hidden');
+                userIcon.classList.add('hidden');
+            }
+        }
+        
+        // Load user data on page load
+        document.addEventListener('DOMContentLoaded', loadUserData);
+    </script>
+</body>
+</html> 

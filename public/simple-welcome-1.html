@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtside - Simple Welcome 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        .slide-up { animation: slideUp 0.8s ease-out 0.3s both; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md text-center">
+            <!-- Main Content -->
+            <div class="bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-white/20 fade-in">
+                <!-- Logo/Icon -->
+                <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <span class="text-4xl">🏸</span>
+                </div>
+                
+                <!-- Welcome Title -->
+                <h1 class="text-4xl font-bold text-white mb-6">Welcome to Courtside</h1>
+                
+                <!-- Slogan -->
+                <p class="text-white/80 text-xl mb-8">Where quality meets fun</p>
+                
+                <!-- Tagline -->
+                <p class="text-white/60 text-lg mb-12">tap, pay, play!</p>
+                
+                <!-- Get Started Button -->
+                <div class="slide-up">
+                    <button class="w-full bg-white text-purple-600 py-4 rounded-2xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

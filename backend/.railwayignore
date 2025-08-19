@@ -1,0 +1,15 @@
+# Force Railway to use Dockerfile instead of Nixpacks
+nixpacks.toml
+.nixpacks/
+
+# Ignore any cached configurations
+.railway/
+railway.toml
+
+# Ignore any Prisma files
+prisma/
+*.prisma
+
+# Ignore node_modules (will be installed fresh)
+node_modules/
+package-lock.json 

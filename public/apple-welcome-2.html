@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtside - Apple Style 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .rainbow-text { 
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow 4s ease-in-out infinite;
+        }
+        .rainbow-border {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+            background-size: 400% 400%;
+            animation: rainbow 6s ease-in-out infinite;
+            padding: 2px;
+            border-radius: 24px;
+        }
+        .fade-in { animation: fadeIn 1.5s ease-out; }
+        .slide-up { animation: slideUp 1s ease-out 0.5s both; }
+        .bounce-in { animation: bounceIn 0.8s ease-out 1s both; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes bounceIn { 
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes rainbow { 
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md text-center">
+            <!-- Main Content -->
+            <div class="fade-in">
+                <!-- Welcome Title -->
+                <h1 class="text-4xl font-light text-white mb-4">Welcome to</h1>
+                <h1 class="text-7xl font-black rainbow-text mb-12 leading-tight">Courtside</h1>
+                
+                <!-- Slogan -->
+                <p class="text-white/70 text-lg mb-20 slide-up font-light">Tap, Pay, Play!</p>
+                
+                <!-- Continue Button -->
+                <div class="bounce-in">
+                    <div class="rainbow-border">
+                        <button class="w-full bg-white/20 backdrop-blur-md text-white py-5 rounded-3xl font-semibold text-lg hover:bg-white/30 transition-all duration-500">
+                            Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtside - Apple Style 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); }
+        .rainbow-text { 
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow 3s ease-in-out infinite;
+        }
+        .fade-in { animation: fadeIn 1.2s ease-out; }
+        .slide-up { animation: slideUp 0.8s ease-out 0.4s both; }
+        .scale-in { animation: scaleIn 0.6s ease-out 0.6s both; }
+        .glow { animation: glow 2s ease-in-out infinite alternate; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes scaleIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes rainbow { 
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes glow { from { text-shadow: 0 0 20px rgba(255,255,255,0.1); } to { text-shadow: 0 0 30px rgba(255,255,255,0.3); } }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md text-center">
+            <!-- Main Content -->
+            <div class="fade-in">
+                <!-- Welcome Title -->
+                <h1 class="text-5xl font-bold text-white mb-8 glow">Welcome to</h1>
+                <h1 class="text-6xl font-black rainbow-text mb-8 leading-tight">Courtside</h1>
+                
+                <!-- Slogan -->
+                <p class="text-white/80 text-xl mb-8 slide-up font-light">Book. Play. Repeat.</p>
+                
+                <!-- Tagline -->
+                <p class="text-white/60 text-lg mb-16 slide-up">tap, pay, play!</p>
+                
+                <!-- Continue Button -->
+                <div class="scale-in">
+                    <button class="w-full bg-white text-black py-5 rounded-3xl font-semibold text-lg hover:bg-gray-100 transition-all duration-500 shadow-2xl transform hover:scale-105">
+                        Continue
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details - Courtside</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+        
+        .ios-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .ios-button {
+            background: #007AFF;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .ios-button:hover {
+            background: #0056CC;
+            transform: scale(0.98);
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-sm mx-auto animate-slide-up">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span class="text-4xl">🏸</span>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Booking Details</h1>
+            <p class="text-gray-500">Shared by your friend</p>
+        </div>
+
+        <!-- Main Card -->
+        <div class="ios-card p-6 mb-6">
+            <!-- Status Badge -->
+            <div class="flex justify-end mb-4">
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                    ✓ Confirmed
+                </span>
+            </div>
+
+            <!-- Sport Info -->
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-1">Badminton</h2>
+                <p class="text-gray-500">Court 3</p>
+            </div>
+
+            <!-- Details Grid -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="text-center p-4 bg-gray-50 rounded-xl">
+                    <div class="text-2xl mb-2">📅</div>
+                    <p class="text-gray-600 text-sm">Date</p>
+                    <p class="font-semibold text-gray-900">Jan 15</p>
+                </div>
+                
+                <div class="text-center p-4 bg-gray-50 rounded-xl">
+                    <div class="text-2xl mb-2">⏰</div>
+                    <p class="text-gray-600 text-sm">Time</p>
+                    <p class="font-semibold text-gray-900">2:00 PM</p>
+                </div>
+                
+                <div class="text-center p-4 bg-gray-50 rounded-xl">
+                    <div class="text-2xl mb-2">⏱️</div>
+                    <p class="text-gray-600 text-sm">Duration</p>
+                    <p class="font-semibold text-gray-900">2 hours</p>
+                </div>
+                
+                <div class="text-center p-4 bg-gray-50 rounded-xl">
+                    <div class="text-2xl mb-2">💰</div>
+                    <p class="text-gray-600 text-sm">Total</p>
+                    <p class="font-semibold text-gray-900">$24.00</p>
+                </div>
+            </div>
+
+            <!-- Time Range -->
+            <div class="bg-blue-50 p-4 rounded-xl mb-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-blue-700 font-medium">Session Time</span>
+                    <span class="text-blue-900 font-semibold">2:00 PM - 4:00 PM</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-3">
+            <button class="ios-button w-full text-white font-semibold py-4 flex items-center justify-center space-x-2">
+                <span class="text-xl">📍</span>
+                <span>Get Directions</span>
+            </button>
+            
+            <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-4 rounded-xl transition-all duration-200">
+                Book Similar Session
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8">
+            <p class="text-gray-400 text-sm">Powered by Courtside Mini App</p>
+        </div>
+    </div>
+</body>
+</html> 

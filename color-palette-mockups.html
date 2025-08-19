@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtside App - Color Palette Variations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1d1d1f;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .palette-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .palette-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .palette-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .color-samples {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .color-sample {
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .mockup-screen {
+            height: 400px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .mockup-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mockup-content {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .mockup-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .mockup-button {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        /* Palette 1: Sunset Vibes */
+        .palette-1 .mockup-screen {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFA726 100%);
+        }
+
+        .palette-1 .color-sample:nth-child(1) { background: #FF6B6B; }
+        .palette-1 .color-sample:nth-child(2) { background: #FF8E53; }
+        .palette-1 .color-sample:nth-child(3) { background: #FFA726; }
+        .palette-1 .color-sample:nth-child(4) { background: #FF7043; }
+        .palette-1 .color-sample:nth-child(5) { background: #FF5722; }
+        .palette-1 .color-sample:nth-child(6) { background: #FF9800; }
+
+        /* Palette 2: Ocean Depths */
+        .palette-2 .mockup-screen {
+            background: linear-gradient(135deg, #2196F3 0%, #03A9F4 50%, #00BCD4 100%);
+        }
+
+        .palette-2 .color-sample:nth-child(1) { background: #2196F3; }
+        .palette-2 .color-sample:nth-child(2) { background: #03A9F4; }
+        .palette-2 .color-sample:nth-child(3) { background: #00BCD4; }
+        .palette-2 .color-sample:nth-child(4) { background: #0097A7; }
+        .palette-2 .color-sample:nth-child(5) { background: #006064; }
+        .palette-2 .color-sample:nth-child(6) { background: #0288D1; }
+
+        /* Palette 3: Forest Magic */
+        .palette-3 .mockup-screen {
+            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 50%, #81C784 100%);
+        }
+
+        .palette-3 .color-sample:nth-child(1) { background: #4CAF50; }
+        .palette-3 .color-sample:nth-child(2) { background: #66BB6A; }
+        .palette-3 .color-sample:nth-child(3) { background: #81C784; }
+        .palette-3 .color-sample:nth-child(4) { background: #388E3C; }
+        .palette-3 .color-sample:nth-child(5) { background: #2E7D32; }
+        .palette-3 .color-sample:nth-child(6) { background: #43A047; }
+
+        /* Palette 4: Cosmic Purple */
+        .palette-4 .mockup-screen {
+            background: linear-gradient(135deg, #9C27B0 0%, #BA68C8 50%, #E1BEE7 100%);
+        }
+
+        .palette-4 .color-sample:nth-child(1) { background: #9C27B0; }
+        .palette-4 .color-sample:nth-child(2) { background: #BA68C8; }
+        .palette-4 .color-sample:nth-child(3) { background: #E1BEE7; }
+        .palette-4 .color-sample:nth-child(4) { background: #7B1FA2; }
+        .palette-4 .color-sample:nth-child(5) { background: #6A1B9A; }
+        .palette-4 .color-sample:nth-child(6) { background: #8E24AA; }
+
+        .description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .features {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .features li {
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Courtside App - Color Palette Variations</h1>
+        
+        <div class="palette-grid">
+            <!-- Palette 1: Sunset Vibes -->
+            <div class="palette-card palette-1">
+                <div class="palette-title">🌅 Sunset Vibes</div>
+                <div class="color-samples">
+                    <div class="color-sample">#FF6B6B</div>
+                    <div class="color-sample">#FF8E53</div>
+                    <div class="color-sample">#FFA726</div>
+                    <div class="color-sample">#FF7043</div>
+                    <div class="color-sample">#FF5722</div>
+                    <div class="color-sample">#FF9800</div>
+                </div>
+                
+                <div class="mockup-screen">
+                    <div class="mockup-header">
+                        <h2 style="color: white; font-size: 1.5rem;">Courtside</h2>
+                        <div style="color: white;">🏸</div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="mockup-card">
+                            <h3 style="color: white; margin-bottom: 10px;">Book Your Court</h3>
+                            <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px;">Ready to play? Choose your sport and time.</p>
+                            <div class="mockup-button">🏸 Badminton</div>
+                            <div class="mockup-button">🏓 Pickleball</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    Warm, energetic gradients perfect for sports apps. Creates excitement and motivation.
+                </div>
+                <div class="features">
+                    <ul>
+                        <li>High energy & motivation</li>
+                        <li>Perfect for sports apps</li>
+                        <li>Great contrast & readability</li>
+                        <li>Trendy & modern feel</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Palette 2: Ocean Depths -->
+            <div class="palette-card palette-2">
+                <div class="palette-title">🌊 Ocean Depths</div>
+                <div class="color-samples">
+                    <div class="color-sample">#2196F3</div>
+                    <div class="color-sample">#03A9F4</div>
+                    <div class="color-sample">#00BCD4</div>
+                    <div class="color-sample">#0097A7</div>
+                    <div class="color-sample">#006064</div>
+                    <div class="color-sample">#0288D1</div>
+                </div>
+                
+                <div class="mockup-screen">
+                    <div class="mockup-header">
+                        <h2 style="color: white; font-size: 1.5rem;">Courtside</h2>
+                        <div style="color: white;">🏸</div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="mockup-card">
+                            <h3 style="color: white; margin-bottom: 10px;">Your Bookings</h3>
+                            <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px;">Manage your upcoming court reservations.</p>
+                            <div class="mockup-button">📅 View Bookings</div>
+                            <div class="mockup-button">➕ New Booking</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    Calming blue tones that convey trust and professionalism. Perfect for booking apps.
+                </div>
+                <div class="features">
+                    <ul>
+                        <li>Trustworthy & professional</li>
+                        <li>Calming & focused</li>
+                        <li>Great for booking apps</li>
+                        <li>iOS 18 compatible</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Palette 3: Forest Magic -->
+            <div class="palette-card palette-3">
+                <div class="palette-title">🌲 Forest Magic</div>
+                <div class="color-samples">
+                    <div class="color-sample">#4CAF50</div>
+                    <div class="color-sample">#66BB6A</div>
+                    <div class="color-sample">#81C784</div>
+                    <div class="color-sample">#388E3C</div>
+                    <div class="color-sample">#2E7D32</div>
+                    <div class="color-sample">#43A047</div>
+                </div>
+                
+                <div class="mockup-screen">
+                    <div class="mockup-header">
+                        <h2 style="color: white; font-size: 1.5rem;">Courtside</h2>
+                        <div style="color: white;">🏸</div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="mockup-card">
+                            <h3 style="color: white; margin-bottom: 10px;">Credits & Points</h3>
+                            <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px;">Track your rewards and credits balance.</p>
+                            <div class="mockup-button">💳 Credits: $45</div>
+                            <div class="mockup-button">⭐ Points: 1,250</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    Natural green tones that feel fresh and organic. Great for wellness and activity apps.
+                </div>
+                <div class="features">
+                    <ul>
+                        <li>Fresh & natural feel</li>
+                        <li>Wellness-focused</li>
+                        <li>Easy on the eyes</li>
+                        <li>Millennial-friendly</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Palette 4: Cosmic Purple -->
+            <div class="palette-card palette-4">
+                <div class="palette-title">✨ Cosmic Purple</div>
+                <div class="color-samples">
+                    <div class="color-sample">#9C27B0</div>
+                    <div class="color-sample">#BA68C8</div>
+                    <div class="color-sample">#E1BEE7</div>
+                    <div class="color-sample">#7B1FA2</div>
+                    <div class="color-sample">#6A1B9A</div>
+                    <div class="color-sample">#8E24AA</div>
+                </div>
+                
+                <div class="mockup-screen">
+                    <div class="mockup-header">
+                        <h2 style="color: white; font-size: 1.5rem;">Courtside</h2>
+                        <div style="color: white;">🏸</div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="mockup-card">
+                            <h3 style="color: white; margin-bottom: 10px;">Modify Booking</h3>
+                            <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px;">Update your court reservation details.</p>
+                            <div class="mockup-button">✏️ Edit Booking</div>
+                            <div class="mockup-button">❌ Cancel Booking</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    Modern purple gradients that feel premium and innovative. Perfect for Gen Z appeal.
+                </div>
+                <div class="features">
+                    <ul>
+                        <li>Premium & innovative</li>
+                        <li>Gen Z favorite</li>
+                        <li>Modern & trendy</li>
+                        <li>High-end feel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+            <h2 style="color: #1d1d1f; margin-bottom: 15px;">🎨 Recommendation</h2>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
+                <strong>Ocean Depths (Palette 2)</strong> would be perfect for Courtside because it:
+            </p>
+            <ul style="text-align: left; max-width: 500px; margin: 0 auto; color: #666;">
+                <li>Conveys trust and reliability for booking services</li>
+                <li>Matches iOS 18 design language perfectly</li>
+                <li>Appeals to both Gen Z and Millennials</li>
+                <li>Provides excellent readability and accessibility</li>
+                <li>Creates a calm, focused environment for booking decisions</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 
