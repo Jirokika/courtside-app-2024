@@ -1,0 +1,50 @@
+# Railway deployment ignore file
+# Ignore everything except the backend and essential configs
+*
+!backend/
+!railway.json
+!README.md
+
+# Keep backend essentials only
+backend/node_modules/
+backend/dist/
+backend/*.log
+backend/.env
+backend/.env.*
+
+# Keep the deployment files we need
+backend/Dockerfile
+backend/package*.json
+backend/src/
+backend/tsconfig.json
+
+# Ignore frontend and other non-backend stuff
+src/
+public/
+dist/
+node_modules/
+*.html
+*.css
+*.js
+!backend/**/*.js
+!backend/**/*.ts
+vite.config.ts
+tailwind.config.js
+postcss.config.js
+
+# Ignore development and workspace files
+*.code-workspace
+*.log
+.DS_Store
+.vscode/
+.git/
+
+# Ignore documentation that's not needed for backend deployment
+DEPLOYMENT_*.md
+RAILWAY_*.md
+TODO_*.md
+POINTS_*.md
+BOOKING_*.md
+*mockup*
+debug-*
+color-palette-*

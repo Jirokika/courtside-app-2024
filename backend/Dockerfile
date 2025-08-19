@@ -1,57 +1,43 @@
-# FORCE CACHE BUST v1.1.2 - 2025-08-05 18:00 - RAILWAY RUNTIME FIX
-FROM node:22-alpine
+# Clean Railway Backend Build v2.0
+FROM node:20-alpine
 
 # Set timezone to Cambodia (UTC+7)
 ENV TZ=Asia/Phnom_Penh
-ENV FORCE_REBUILD=true
-ENV DEPLOYMENT_TIMESTAMP=2025-08-05-18-00
-ENV RAILWAY_RUNTIME_FIX=v1.1.2
-ENV FORCE_COMPLETE_REBUILD=true
+ENV NODE_ENV=production
+
+# Install timezone data and set timezone
 RUN apk add --no-cache tzdata && \
     cp /usr/share/zoneinfo/Asia/Phnom_Penh /etc/localtime && \
     echo "Asia/Phnom_Penh" > /etc/timezone
 
 WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package.json ./
+# Copy package files
+COPY package*.json ./
 
-# Install dependencies with clean slate - Force complete rebuild
-RUN npm cache clean --force && \
-    rm -rf node_modules && \
-    rm -rf dist && \
-    npm install && \
-    echo "✅ Dependencies installed (clean rebuild)"
+# Clean install dependencies
+RUN npm ci --only=production=false && \
+    npm cache clean --force
 
-# Verify no Prisma contamination
-RUN echo "🔍 Checking for Prisma files..." && \
-    PRISMA_FILES=$(find . -name '*prisma*' -type f 2>/dev/null || true) && \
-    if [ -n "$PRISMA_FILES" ]; then \
-        echo "❌ PRISMA FOUND - BUILD FAILED"; \
-        echo "$PRISMA_FILES"; \
-        exit 1; \
-    else \
-        echo "✅ No Prisma files found"; \
-    fi && \
-    echo "🔍 Checking for @prisma package..." && \
-    if [ -d "node_modules/@prisma" ]; then \
-        echo "❌ @PRISMA PACKAGE FOUND - BUILD FAILED"; \
-        ls -la node_modules/@prisma/; \
-        exit 1; \
-    else \
-        echo "✅ No @prisma package found - proceeding with build"; \
-    fi
-
-# Copy source code
+# Copy source code and config
 COPY src ./src
 COPY tsconfig.json ./
-COPY railway.json ./
 
 # Build the application
-RUN npm run build
+RUN npm run build && \
+    rm -rf src && \
+    rm tsconfig.json
 
-# Expose port (Railway will set PORT env var)
+# Expose port
 EXPOSE 8080
 
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD node -e "const http = require('http'); \
+    const options = { hostname: 'localhost', port: process.env.PORT || 8080, path: '/health', timeout: 5000 }; \
+    const req = http.request(options, (res) => { process.exit(res.statusCode === 200 ? 0 : 1); }); \
+    req.on('error', () => process.exit(1)); \
+    req.end();"
+
 # Start the application
-CMD ["npm", "start"] 
+CMD ["npm", "start"]
